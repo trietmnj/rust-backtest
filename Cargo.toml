@@ -1,0 +1,13 @@
+[package]
+name = "rust-backtest"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+barter = "0.7.1"
+tokio = { version = "1.17.0", features = ["full"] }
+uuid = { version = "0.8", features = ["serde", "v4"] }
+parking_lot = "0.12"
+barter-data = "0.3.2"

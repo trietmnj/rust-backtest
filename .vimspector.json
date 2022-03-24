@@ -1,0 +1,88 @@
+{
+  "adapters": {
+    "docker-gdb": {
+      "command": [
+        "${gadgetDir}/vscode-cpptools/debugAdapters/bin/OpenDebugAD7"
+      ],
+      "name": "cppdbg",
+      "configuration": {
+        "type": "cppdbg"
+      },
+      "launch": {
+        "remote": {
+          "container": "RUSTBACKTEST_DEV",
+          "runCommand": [
+            "gdbserver",
+            "--once",
+            "--no-startup-with-shell",
+            "--disable-randomization",
+            "0.0.0.0:5678",
+            "%CMD%"
+          ]
+        },
+        "delay": "1000m"
+      },
+      "attach": {
+        "remote": {
+          "container": "RUSTBACKTEST_DEV",
+          "pidCommand": [
+            "sh",
+            "-c",
+            "pgrep -f rust-backtest"
+          ],
+          "attachCommand": [
+            "gdbserver",
+            "--once",
+            "--attach",
+            "0.0.0.0:5678",
+            "%PID%"
+          ]
+        },
+        "delay": "1000m"
+      }
+    }
+  },
+  "configurations": {
+    "remoteLaunch": {
+      "adapter": "docker-gdb",
+      "remote-request": "launch",
+      "remote-cmdLine": [
+        "/workspaces/rust-backtest/target/debug/rust-backtest"
+      ],
+      "configuration": {
+        "request": "launch",
+        "MIMode": "gdb",
+        "miDebuggerServerAddress": "host.docker.internal:${port}",
+        "program": "${workspaceRoot}/target/debug/rust-backtest",
+        "cwd": "${workspaceRoot}"
+      }
+    },
+    "remoteAttach": {
+      "adapter": "docker-gdb",
+      "remote-request": "attach",
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/src/main.rs",
+        "cwd": "${workspaceRoot}",
+        "MIMode": "gdb",
+        "miDebuggerServerAddress": "${host}:${port}",
+        "sourceFileMap": {
+          "/workspaces/rust-backtest": "${workspaceRoot}"
+        }
+      }
+    },
+    "local launch": {
+      "adapter": "vscode-cpptools",
+      "configuration": {
+        "request": "launch",
+        "program": "${Executable}",
+        "args": [
+          "*${Args}"
+        ],
+        "externalConsole": true,
+        "stopOnEntry": true,
+        "MIMode": "gdb"
+      }
+    }
+  }
+}

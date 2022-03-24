@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  rust-backtest:
+    container_name: RUSTBACKTEST_DEV
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    env_file:
+      - .devcontainer/devcontainer.env
+    security_opt:
+      - seccomp:unconfined
+    ports:
+      - 5678:5678
+    volumes:
+      - .:/workspaces/rust-backtest
+    working_dir: /workspaces/rust-backtest
+    tty: true
+    entrypoint: ["bash"]
+
+
