@@ -16,7 +16,7 @@
             "--once",
             "--no-startup-with-shell",
             "--disable-randomization",
-            "0.0.0.0:5678",
+            "0.0.0.0:${port}",
             "%CMD%"
           ]
         },

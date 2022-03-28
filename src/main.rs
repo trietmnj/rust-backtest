@@ -22,10 +22,13 @@ use parking_lot;
 use tokio::sync::mpsc;
 use uuid::Uuid;
 
+mod data;
+
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Setup Logger & Load Config For Engine & Trader Instances Here
 
+    let data_handler = data::store::new_mysql_store();
     // Create channel to distribute Commands to the Engine & it's Traders (eg/ Command::Terminate)
     let (_command_tx, command_rx) = mpsc::channel(20);
 
