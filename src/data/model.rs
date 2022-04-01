@@ -10,3 +10,11 @@ pub struct OHLCV {
     low: f32,
     volume: f32,
 }
+
+pub struct dataset {
+    entity: String
+}
+
+pub struct query_input {
+    DataSet:
+}
