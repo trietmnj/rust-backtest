@@ -6,10 +6,11 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-barter = "0.7.1"
+barter = "0.7.2"
 tokio = { version = "1.17.0", features = ["full"] }
 uuid = { version = "0.8", features = ["serde", "v4"] }
 parking_lot = "0.12"
 barter-data = "0.3.2"
-mysql = "*"
 chrono = "0.4"
+anyhow = "1.0.58"
+serde_json = "1.0.82"
